@@ -51,15 +51,12 @@ module.exports = {
 								callback new Error("Error retrieving #{ctx} as JSON-LD")
 		return ctx
 
-	withContext : (ctx) ->
-		throw new Error("Must give context") unless ctx
+	withContext : (contexts...) ->
+		throw new Error("Must give context") unless contexts.length
 
-		unless Array.isArray ctx
-			ctx = [ctx]
-		mergedCtx = {}
-		for thisCtx in ctx
-			mergedCtx = DeepMerge(mergedCtx, @loadContext(thisCtx))
-		ctx = mergedCtx
+		ctx = {}
+		for thisCtx in contexts
+			ctx = DeepMerge(ctx, @loadContext(thisCtx))
 
 		revCtx = {}
 		for prefix, uri of ctx
