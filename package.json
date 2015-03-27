@@ -1,6 +1,6 @@
 {
   "name": "jsonld-common-contexts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Cached versions of commonly used namespaces",
   "scripts": {
     "test": "coffee test/*.coffee | tap-spec",
