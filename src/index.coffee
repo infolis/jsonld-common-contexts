@@ -56,7 +56,8 @@ module.exports = {
 		ctx = self.loadContext(ctx)
 		revCtx = {}
 		for prefix, uri of ctx
-			revCtx[uri] = prefix
+			if uri not of revCtx
+				revCtx[uri] = prefix
 		return {
 			shorten: (uri) ->
 				[base, term] = self.destructureURI uri
@@ -68,6 +69,8 @@ module.exports = {
 				if prefix of ctx
 					curie = ctx[prefix] + term
 				return curie
+			shorten_expand: (str) ->
+				return @shorten @expand str
 		}
 
 	destructureCURIE : (curie) ->
