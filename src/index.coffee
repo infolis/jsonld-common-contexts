@@ -80,6 +80,11 @@ module.exports = {
 				return curie
 			shorten_expand: (str) ->
 				return @shorten @expand str
+			namespaces : (type = 'jsonld') ->
+				if type is 'jsonld'
+					return ctx
+				else
+					throw new Error("Not implemented yet for anything except 'jsonld'")
 		}
 
 	destructureCURIE : (curie) ->

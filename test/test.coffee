@@ -18,7 +18,7 @@ jcc = require '../src'
 #         t.equals jcc.loadContext('http://dcat.io'), ctx, "Context was cached can be used sync now"
 #         t.end()
 
-test "withContext", (t) ->
+test "withContext shorten/expand", (t) ->
 	exp = {
 		'dc:type': 'http://purl.org/dc/elements/1.1/type'
 	}
@@ -33,6 +33,12 @@ test "withContext", (t) ->
 	}
 	for curie, uri of exp
 		t.equals jcc.withContext({'foobar': 'urn:quux/'}).expand(curie), uri
+	t.end()
+
+test "withContext shorten/expand", (t) ->
+	ctx = {'foo':'bar'}
+	t.deepEquals jcc.withContext(ctx).namespaces(), ctx
+	t.deepEquals jcc.withContext(ctx).namespaces('jsonld'), ctx
 	t.end()
 
 # ALT: src/index.coffee
