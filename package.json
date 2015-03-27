@@ -5,7 +5,7 @@
   "scripts": {
     "test": "coffee test/*.coffee | tap-spec",
     "docs": "docker -i src -o apidocs -s -n -c vs",
-    "compile": "coffee -c -o lib src",
+    "compile": "coffee -c -o lib src ; cp -r src/contexts lib",
     "clean": "rm -r apidocs lib ; true",
     "prepublish": "npm run compile"
   },
