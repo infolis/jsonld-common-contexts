@@ -26,6 +26,7 @@ test "withContext", (t) ->
 		t.equals jcc.withContext('basic').shorten(uri), curie
 		t.equals jcc.withContext('basic').expand(curie), uri
 		t.equals jcc.withContext('prefix.cc', 'basic').expand(curie), uri
+		t.equals jcc.withContext(['prefix.cc', 'basic']).expand(curie), uri
 
 	exp = {
 		'foobar:baz': 'urn:quux/baz'

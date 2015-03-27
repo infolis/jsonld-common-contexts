@@ -54,6 +54,9 @@ module.exports = {
 	withContext : (contexts...) ->
 		throw new Error("Must give context") unless contexts.length
 
+		if Array.isArray contexts[0]
+			contexts = contexts[0]
+
 		ctx = {}
 		for thisCtx in contexts
 			ctx = DeepMerge(ctx, @loadContext(thisCtx))
