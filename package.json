@@ -1,0 +1,34 @@
+{
+  "name": "jsonld-common-contexts",
+  "version": "0.0.1",
+  "description": "Cached versions of commonly used namespaces",
+  "scripts": {
+    "test": "coffee test/*.coffee | tap-spec",
+    "docs": "docker -i src -o apidocs -s -n -c vs",
+    "compile": "coffee -c -o lib src",
+    "clean": "rm -r apidocs lib ; true",
+    "prepublish": "npm run compile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kba/jsonld-common-contexts"
+  },
+  "author": "kba",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kba/jsonld-common-contexts/issues"
+  },
+  "homepage": "https://github.com/kba/jsonld-common-contexts",
+  "dependencies": {
+    "async": "^0.9.0",
+    "merge": "^1.2.0",
+    "superagent": "^1.1.0"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.9.1",
+    "docker": "^0.2.14",
+    "tap-spec": "^2.2.2",
+    "tapes": "^0.4.1"
+  },
+  "main": "lib/index.js"
+}
