@@ -5,7 +5,8 @@
 
 ###
 
-Request = require 'superagent'
+DeepMerge = require 'deepmerge'
+Request   = require 'superagent'
 
 # maps concise names to paths to be required
 predefinedContexts = {
@@ -52,12 +53,20 @@ module.exports = {
 
 	withContext : (ctx) ->
 		throw new Error("Must give context") unless ctx
-		self = @
-		ctx = self.loadContext(ctx)
+
+		unless Array.isArray ctx
+			ctx = [ctx]
+		mergedCtx = {}
+		for thisCtx in ctx
+			mergedCtx = DeepMerge(mergedCtx, @loadContext(thisCtx))
+		ctx = mergedCtx
+
 		revCtx = {}
 		for prefix, uri of ctx
 			if uri not of revCtx
 				revCtx[uri] = prefix
+
+		self = @
 		return {
 			shorten: (uri) ->
 				[base, term] = self.destructureURI uri
