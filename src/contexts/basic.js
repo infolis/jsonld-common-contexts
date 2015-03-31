@@ -8,12 +8,12 @@ module.exports = {
         "skos": "http://www.w3.org/2004/02/skos/core#",
         "xsd": "http://www.w3.org/2001/XMLSchema#",
         "dcterms": "http://purl.org/dc/terms/",
-        "schema": "http://schema.org/"
+        "schema": "http://schema.org/",
+        "bibo": "http://purl.org/ontology/bibo/"
         // "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
         // "geonames": "http://www.geonames.org/ontology#",
         // "dbp": "http://dbpedia.org/property/",
         // "dbpedia": "http://dbpedia.org/resource/",
-        "bibo": "http://purl.org/ontology/bibo/",
         // "void": "http://rdfs.org/ns/void#",
         // "ex": "http://example.com/",
         // "biblio": "http://purl.org/net/biblio#",
