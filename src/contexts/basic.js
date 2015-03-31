@@ -13,7 +13,7 @@ module.exports = {
         // "geonames": "http://www.geonames.org/ontology#",
         // "dbp": "http://dbpedia.org/property/",
         // "dbpedia": "http://dbpedia.org/resource/",
-        // "bibo": "http://purl.org/ontology/bibo/",
+        "bibo": "http://purl.org/ontology/bibo/",
         // "void": "http://rdfs.org/ns/void#",
         // "ex": "http://example.com/",
         // "biblio": "http://purl.org/net/biblio#",
