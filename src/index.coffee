@@ -23,7 +23,6 @@ predefinedContexts = {
 _ctxCache = {}
 module.exports = {
 
-	# TODO this should be moved elsewhere
 	loadContext : (ctx, callback) ->
 		# If this is a string but not a URL
 		if typeof ctx is 'string' 
@@ -81,10 +80,21 @@ module.exports = {
 			shorten_expand: (str) ->
 				return @shorten @expand str
 			namespaces : (type = 'jsonld') ->
-				if type is 'jsonld'
-					return ctx
-				else
-					throw new Error("Not implemented yet for anything except 'jsonld'")
+				switch type
+					when 'jsonld'
+						return ctx
+					when 'rapper-args'
+						ret = []
+						ret.push("-f", "xmlns:#{prefix}=\"#{url}\"") for prefix, url of ctx
+						return ret
+					when 'turtle', 'n3', 'trig'
+						("@prefix #{prefix}: <#{url}> ." for prefix, url of ctx).join('\n')
+					when 'rdfxml'
+						(" xmlns:#{prefix}=\"#{url}\"" for prefix, url of ctx).join(' ')
+					when 'sparql'
+						("PREFIX #{prefix}: <#{url}>" for prefix, url of ctx).join('\n')
+					else
+						throw new Error("Not implemented for type #{type}")
 		}
 
 	destructureCURIE : (curie) ->

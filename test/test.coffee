@@ -1,4 +1,4 @@
-test = require 'tapes'
+test = require 'tape'
 jcc = require '../src'
 
 # test "URL destructuring", (t) ->
@@ -39,6 +39,25 @@ test "withContext shorten/expand", (t) ->
 	ctx = {'foo':'bar'}
 	t.deepEquals jcc.withContext(ctx).namespaces(), ctx
 	t.deepEquals jcc.withContext(ctx).namespaces('jsonld'), ctx
+	t.end()
+
+test.only "withContext namespaces", (t) ->
+	ctx = {
+		'foo': 'urn:foo/'
+		'bar': 'urn:bar/'
+	}
+	wc = jcc.withContext(ctx)
+	t.deepEquals wc.namespaces('jsonld'), ctx
+	t.deepEquals wc.namespaces(), ctx
+	okNamespaces = [
+		['turtle', '@prefix foo: <urn:foo/> .\n']
+		['sparql', 'PREFIX foo: <urn:foo/>\n']
+		['rdfxml', ' xmlns:foo="urn:foo/"']
+	]
+	for [type, expect] in okNamespaces
+		# console.log expect
+		# console.log wc.namespaces(type)
+		t.ok wc.namespaces(type).indexOf(expect) == 0, 'Expected start'
 	t.end()
 
 # ALT: src/index.coffee
