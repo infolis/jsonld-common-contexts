@@ -11,6 +11,7 @@ Request   = require 'superagent'
 # maps concise names to paths to be required
 predefinedContexts = {
 	'prefix.cc':  './contexts/prefix.cc'
+	'anno':       './contexts/anno.jsonld'
 	'rdfa':       './contexts/rdfa11'
 	'rdfa11':     './contexts/rdfa11'
 	'basic':      './contexts/basic'
