@@ -20,9 +20,7 @@
   },
   "homepage": "https://github.com/kba/jsonld-common-contexts",
   "dependencies": {
-    "async": "^1.5.0",
-    "deepmerge": "^0.2.7",
-    "superagent": "^1.4.0"
+    "@kba/node-utils": "^0.2.1"
   },
   "devDependencies": {
     "coffee-script": "^1.9.1",

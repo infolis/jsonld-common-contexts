@@ -5,8 +5,7 @@
 
 ###
 
-DeepMerge = require 'deepmerge'
-Request   = require 'superagent'
+{deepmerge, fetch} = require('@kba/node-utils')
 
 # maps concise names to paths to be required
 predefinedContexts = {
@@ -40,15 +39,14 @@ module.exports = {
 					# require callback for uncached URIs
 					if not callback
 						throw new Error("Must provide callback when passing an uncached URI")
-					Request
-						.get(ctx)
-						.set('Accept', 'application/ld+json')
-						.end (err, resp) ->
-							if not err and resp.status == 200 and resp.body
-								_ctxCache[ctx] = resp.body
-								callback err, resp.body
-							else
-								callback new Error("Error retrieving #{ctx} as JSON-LD")
+					fetch(ctx, {
+						headers:
+							'Accept': 'application/ld+json'
+					}).then((resp) => resp.json()).then((body) ->
+						_ctxCache[ctx] body
+						callback err, body
+					).catch (err) ->
+						callback new Error("Error retrieving #{ctx} as JSON-LD")
 		return ctx
 
 	withContext : (contexts...) ->
@@ -59,7 +57,7 @@ module.exports = {
 
 		ctx = {}
 		for thisCtx in contexts
-			ctx = DeepMerge(ctx, @loadContext(thisCtx))
+			ctx = deepmerge(ctx, @loadContext(thisCtx))
 
 		revCtx = {}
 		for prefix, uri of ctx
